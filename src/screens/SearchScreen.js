@@ -8,7 +8,14 @@ const SearchScreen = () => {
   const [term, setTerm] = useState("");
   const [searchApi, results, errorMessage] = useResults();
 
-  console.log(results);
+  const filterResultsByPrice = (price) => {
+    // price === '$' || '$$' || '$$$' || '$$$$'
+    // return appropriate results
+
+    return results.filter((result) => {
+      return result.price === price;
+    });
+  };
 
   return (
     <View>
@@ -19,9 +26,10 @@ const SearchScreen = () => {
       />
       {errorMessage ? <Text>{errorMessage}</Text> : null}
       <Text>Found {results.length} results</Text>
-      <ResultsList title="Cheap" />
-      <ResultsList title="Average" />
-      <ResultsList title="Ballin'" />
+      <ResultsList results={filterResultsByPrice("$")} title="Cheap" />
+      <ResultsList results={filterResultsByPrice("$$")} title="Average" />
+      <ResultsList results={filterResultsByPrice("$$$")} title="Okurr" />
+      <ResultsList results={filterResultsByPrice("$$$$")} title="Ballin'" />
     </View>
   );
 };
