@@ -20,8 +20,17 @@ const ResultsShowScreen = ({ navigation }) => {
   }
 
   return (
-    <View>
-      <Text>{result.name}</Text>
+    <View style={styles.continaer}>
+      <View>
+        <Text style={styles.restaurantNameStyle}>{result.name}</Text>
+        <Text>{result.location.address1}</Text>
+        <Text>
+          {result.location.city}, {result.location.state}{" "}
+          {result.location.zip_code}
+        </Text>
+        <Text style={styles.phoneStyle}>{result.display_phone}</Text>
+        {/* <Text>Business Hours: {result.hours.hours_type}</Text> */}
+      </View>
       <FlatList
         data={result.photos}
         keyExtractor={(photo) => photo}
@@ -34,9 +43,25 @@ const ResultsShowScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  continaer: {
+    marginLeft: 15,
+  },
+  infoViewStyle: {
+    alignItems: "flex-start",
+  },
   imageStyle: {
     height: 200,
     width: 300,
+  },
+  restaurantNameStyle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  phoneStyle: {
+    marginTop: 5,
+    marginBottom: 5,
   },
 });
 
